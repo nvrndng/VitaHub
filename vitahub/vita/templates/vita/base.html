@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaHub</title>
+    <link rel="stylesheet" href="{% static 'vita/style.css' %}">
+</head>
+<body>
+
+    {% include 'vita/navbar.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+</html>
