@@ -1,0 +1,99 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="forum_page">
+        <div class="container">
+            <div class="forum_page_heading">
+                <div>
+                    <p class="section_subtitle">Общение и поддержка</p>
+                    <h1>Форум VitaHub</h1>
+                    <p>Обсуждайте вопросы здоровья и делитесь опытом.</p>
+                </div>
+
+                <a href="" class="section_button">Создать тему</a>
+
+            </div>
+
+            <div class="forum_categories">
+                <button class="forum_category active">Все темы</button>
+                <button class="forum_category">Здоровье</button>
+                <button class="forum_category">Питание</button>
+                <button class="forum_category">Сон</button>
+                <button class="forum_category">Спорт</button>
+
+            </div>
+
+            <div class="forum_page_topic">
+                <a href="" class="forum_page_topic">
+                    <div class="forum_page_topic_icon">💬</div>
+
+                    <div class="forum_page_topic_content">
+                        <span class="forum_page_topic_category">Здоровье</span>
+                        <h2>Как наладить режим сна?</h2>
+                        <p>Подскажите, пожалуйста, как выстраивали режим сна и какие привычки вам помогли?</p>
+                        <div class="forum_page_topic_meta">
+                            <span>12 ответов</span>
+                            <span>Сегодня</span>
+                        </div>
+                    </div>
+
+                    <div class="forum_page_topic_arrow">-></div>
+                </a>
+
+                <a href="" class="forum_page_topic">
+                    <div class="forum_page_topic_icon">🥗</div>
+
+                    <div class="forum_page_topic_content">
+                        <span class="forum_page_topic_category">Питание</span>
+                        <h2>Как составить сбалансированный рацион?</h2>
+                        <p>Поделитесь своими вариантами питания и полезными привычками!</p>
+                        <div class="forum_page_topic_meta">
+                            <span>8 ответов</span>
+                            <span>Вчера</span>
+                        </div>
+                    </div>
+
+                    <div class="forum_page_topic_arrow">-></div>
+                </a>
+
+                <a href="" class="forum_page_topic">
+                    <div class="forum_page_topic_icon">🏃</div>
+
+                    <div class="forum_page_topic_content">
+                        <span class="forum_page_topic_category">Спорт</span>
+                        <h2>Как начать больше двигаться?</h2>
+                        <p>Обсуждаем простые способы добавить физическую активность в ежедневную рутину.</p>
+                        <div class="forum_page_topic_meta">
+                            <span>15 ответов</span>
+                            <span>2 дня назад</span>
+                        </div>
+                    </div>
+
+                    <div class="forum_page_topic_arrow">-></div>
+                </a>
+
+                <a href="" class="forum_page_topic">
+                    <div class="forum_page_topic_icon">🌿</div>
+
+                    <div class="forum_page_topic_content">
+                        <span class="forum_page_topic_category">Здоровье</span>
+                        <h2>Что помогает вам больше заботиться о себе?</h2>
+                        <p>Расскажите о полезных  привычках, которые вы внедрили в свою жизни.</p>
+                        <div class="forum_page_topic_meta">
+                            <span>6 ответов</span>
+                            <span>3 дня назад</span>
+                        </div>
+                    </div>
+
+                    <div class="forum_page_topic_arrow">-></div>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+</main>
+
+{% endblock %}

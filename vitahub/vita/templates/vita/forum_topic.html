@@ -1,0 +1,146 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="forum_topic_page">
+        <div class="container">
+            <div class="forum_topic_back">
+                <a href=""><- Вернуться к форуму</a>
+            </div>
+
+            <div class="forum_topic_layout">
+                <div class="forum_topic_main">
+                    <article class="forum_post">
+                        <div class="forum_post_header">
+                            <div class="forum_post_author">
+                                <div class="forum_post_avatar">A</div>
+                                <div>
+                                    <h3>Анна</h3>
+                                    <span>Автор темы</span>
+                                </div>
+                            </div>
+
+                            <span class="forum_post_date">Сегодня, 10:35</span>
+                        </div>
+
+                        <div class="forum_post_category">Здоровье</div>
+                        <h1>Как наладить режим сна?</h1>
+                        <div class="forum_post_text">
+                            <p>Всем добрый день! Подскажите, пожалуйста, как вы смогли выстроить режим сна? Что вам больше всего помогло?</p>
+                            <p>Последнее время мне сложно ложиться и вставать в одно и то же время. Не знаю, как это можно исправить.</p>
+                        </div>
+                    </article>
+
+                    <div class="forum_answers">
+                        <div class="forum_answers_heading">
+                            <h2>Ответы</h2>
+                            <span>3 ответа</span>
+                        </div>
+
+                        <article class="forum_post forum_answer">
+                            <div class="forum_post_header">
+                                <div class="forum_post_author">
+                                    <div class="forum_post_avatar">М</div>
+                                    <div>
+                                        <h3>Мария</h3>
+                                        <span>Участник</span>
+                                    </div>
+                                </div>
+
+                                <span class="forum_post_date">Сегодня, 11:10</span>
+
+                            </div>
+
+                            <div class="forum_post_text">
+                                <p>Мне помогло постепенно переносить время отхода ко сну, но при этом вставать строго в одно время.</p>
+
+                            </div>
+
+
+                        </article>
+
+                        <article class="forum_post forum_answer">
+                            <div class="forum_post_header">
+                                <div class="forum_post_author">
+                                    <div class="forum_post_avatar">Е</div>
+                                    <div>
+                                        <h3>Егор</h3>
+                                        <span>Участник</span>
+                                    </div>
+                                </div>
+
+                                <span class="forum_post_date">Сегодня, 12:25</span>
+
+                            </div>
+
+                            <div class="forum_post_text">
+                                <p>Стараюсь не залипать в телефон непосредственно перед сном, уже когда лежу в кровати. Тоже помогает.</p>
+
+                            </div>
+
+
+                        </article>
+
+                        <article class="forum_post forum_answer">
+                            <div class="forum_post_header">
+                                <div class="forum_post_author">
+                                    <div class="forum_post_avatar">Е</div>
+                                    <div>
+                                        <h3>Евлампия</h3>
+                                        <span>Участник</span>
+                                    </div>
+                                </div>
+
+                                <span class="forum_post_date">Сегодня, 13:40</span>
+
+                            </div>
+
+                            <div class="forum_post_text">
+                                <p>Самое главное, так это не пытаться изменить все привычки сразу. Мне помогают маленькие вечерние ритуалы, и то, я вводила их постепенно.</p>
+
+                            </div>
+
+
+                        </article>
+
+                    </div>
+
+                    <div class="forum_reply">
+                        <h2>Оставить ответ</h2>
+                        <p>Поделитесь своим опытом или задайте вопрос другим участникам.</p>
+
+                        <form>
+                            <textarea placeholder="Напишите свой ответ..."></textarea>
+                            <button type="submit" class="section_button">Ответить</button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <aside class="forum_topic_sidebar">
+                    <div class="forum_topic_sidebar_card">
+                        <h3>Информация о теме</h3>
+
+                        <div class="forum_sidebar_item">
+                            <span>Категория</span>
+                            <strong>Здоровье</strong>
+                        </div>
+
+                        <div class="forum_sidebar_item">
+                            <span>Ответов</span>
+                            <strong>3</strong>
+                        </div>
+
+                        <div class="forum_sidebar_item">
+                            <span>Создана</span>
+                            <strong>Сегодня</strong>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

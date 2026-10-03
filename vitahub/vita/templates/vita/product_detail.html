@@ -1,0 +1,86 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="product_detail_page">
+        <div class="container">
+            <div class="product_detail_back">
+                <a href=""><- Вернуться в магазин</a>
+            </div>
+
+            <div class="product_detail_wrapper">
+                <div class="product_detail_main">
+                    <div class="product_detail_top">
+                        <div class="product_detail_image">Витамины</div>
+
+                        <div class="product_detail_info">
+                            <span class="product_detail_category">Витамины</span>
+                            <h1>Комплекс витаминов</h1>
+                            <p class="product_detail_description">Комплекс витаминов для ежедневного рациона. Подходит для дополнения сбалансированного питания.</p>
+
+                            <div class="product_detail_price">
+                                <strong>0 ₽</strong>
+                            </div>
+
+                            <button class="section_button">Добавить в корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="product_detail_section">
+                        <h2>Описание товара</h2>
+                        <p>Комплекс витаминов, предназначенный для дополнения ежедневного рациона. Перед применением рекомендуется ознакомиться с информацией о составе и особенностях продукта.</p>
+                        <p>Товар является частью ассортимента магазина VitaHub.</p>
+                    </div>
+
+                    <div class="product_detail_section">
+                        <h2>Характеристики</h2>
+
+                        <div class="product_characteristics">
+                            <div class="product_characteristic">
+                                <span>Категория</span>
+                                <strong>Витамины</strong>
+                            </div>
+
+                            <div class="product_characteristic">
+                                <span>Формат</span>
+                                <strong>Комплекс</strong>
+                            </div>
+
+                            <div class="product_characteristic">
+                                <span>Количество</span>
+                                <strong>30 порций</strong>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="product_detail_section">
+                        <h2>Важно</h2>
+                        <div class="product_warning">
+                            <span>!</span>
+                            <p>Информация о товаре предназначена для ознакомления и не заменяет консультацию со специалистом.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="product_detail_sidebar">
+                    <div class="product_cart_card">
+                        <h3>Ваш заказ</h3>
+
+                        <p>Добавьте товар в корзину, чтобы продолжить оформление заказа.</p>
+
+                        <div class="product_cart_row">
+                            <span>Стоимость</span>
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <button class="section_button">Добавить в корзину</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

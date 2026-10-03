@@ -1,0 +1,79 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="specialist_detail_page">
+        <div class="container">
+            <div class="specialist_detail_back">
+                <a href=""><- Вернуться к выбору специалистов</a>
+            </div>
+
+        <div class="specialist_detail_wrapper">
+                    <div class="specialist_detail_main">
+                        <div class="specialist_detail_top">
+                            <div class="specialist_detail_photo">Фото</div>
+                            <div class="specialist_detail_info">
+                                <span class="specialist_category">Терапевт</span>
+                                <h1>Анна Смирнова</h1>
+                                <p class="specialist_detail_experience">Опыт работы: 8 лет</p>
+                                <p>Специалист по вопросам общего состояния здоровья и профилактике заболеваний</p>
+                            </div>
+                        </div>
+
+                        <div class="specialist_detail_section">
+                            <h2>О специалисте</h2>
+                            <p>Проводит онлайн-консультации и помогает разобраться с общими вопросами, связанными со здоровьем и профилактикой.</p>
+                            <p>Во время консультации специалист собирает необходимую информацию, отвечает на вопросы пациента и помогает определить дальнейшие шаги.</p>
+                        </div>
+
+                        <div class="specialist_detail_section">
+                            <h2>Образование и опыт</h2>
+                            <ul class="specialist_detail_list">
+                                <li>Высшее медицинское образование</li>
+                                <li>Опыт работы: 8 лет</li>
+                                <li>Консультации онлайн</li>
+                            </ul>
+                        </div>
+
+                        <div class="specialist_detail_section">
+                            <h2>Формат консультации</h2>
+                            <div class="consultation_format">
+                                <span class="consultation_format_icon">💬</span>
+                                <div>
+                                    <h3>Онлайн-чат</h3>
+                                    <p>Общение со специалистов в формате переписки</p>
+                                </div>
+                            </div>
+
+                            <div class="consultation_format">
+                                <span class="consultation_format_icon">🎥</span>
+                                <div>
+                                    <h3>Видеозвонок</h3>
+                                    <p>Онлайн-консультация по видеосвязи.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <aside class="specialist_detail_sidebar">
+                    <div class="specialist_booking_card">
+                        <h3>Запись на консультацию</h3>
+                        <p>Выберите удобный формат консультаци и запишитесь на свободное время.</p>
+
+                        <div class="specialist_booking_price">
+                            <span>Стоимость от</span>
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <a href="" class="section_button">Записаться</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

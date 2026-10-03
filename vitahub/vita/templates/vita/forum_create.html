@@ -1,0 +1,47 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="forum_create_page">
+        <div class="container">
+            <div class="forum_create_wrapper">
+                <div class="forum_create_heading">
+                    <p class="section_subtitle">Общение и поддержка</p>
+                    <h1>Создать новую тему</h1>
+                    <p>Задайте свой вопрос или поделитесь опытом с другими участниками форума</p>
+                </div>
+
+                <form class="forum_create_form">
+                    <div class="forum_form_group">
+                        <label for="topic_title">Название темы</label>
+                        <input type="text" id="topic_title" placeholder="Например: как научиться быстро засыпать?">
+                    </div>
+
+                    <div class="forum_form_group">
+                        <label for="topic_category">Категория</label>
+                        <select id="topic_category">
+                            <option value="">Выберите категорию</option>
+                            <option value="health">Здоровье</option>
+                            <option value="nutrition">Питание</option>
+                            <option value="sleep">Сон</option>
+                            <option value="sport">Спорт</option>
+                        </select>
+                    </div>
+
+                    <div class="forum_form_group">
+                        <label for="topic_text">Текст темы</label>
+                        <textarea id="topic_text" placeholder="Опишите свой вопрос или тему подробнее..."></textarea>
+                    </div>
+
+                    <div class="forum_create_actions">
+                        <a href="" class="forum_cancel_button">Отмена</a>
+                        <button type="submit" class="section_button">Создать тему</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
