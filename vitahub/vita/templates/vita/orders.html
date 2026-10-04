@@ -1,0 +1,100 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="orders_page">
+        <div class="container">
+            <div class="orders_page_heading">
+                <p class="section_subtitle">Личный кабинет</p>
+                <h1>Мои заказы</h1>
+                <p>Здесь вы можете просмотреть историю заказов и узнать их текущий статус.</p>
+            </div>
+
+            <div class="orders_layout">
+                <aside class="orders_sidebar">
+                    <div class="orders_user_card">
+                        <div class="orders_avatar">E</div>
+                        <h2>Егор</h2>
+                        <p>egor@example.com</p>
+                    </div>
+
+                    <nav class="orders_navigation">
+                        <a href="">Мой профиль</a>
+                        <a href="" class="active">Мои заказы</a>
+                        <a href="">Мои консультации</a>
+                        <a href="">Мои баллы</a>
+                        <a href="">Результаты анализов</a>
+                    </nav>
+                </aside>
+
+                <div class="orders_main">
+                    <button class="orders_filters">
+                        <button class="orders_filter active">Все</button>
+                        <button class="orders_filter">В обработке</button>
+                        <button class="orders_filter">Доставляется</button>
+                        <button class="orders_filter">Получены</button>
+                    </button>
+                </div>
+
+                <div class="order_list">
+                    <article class="order_card">
+                        <div class="order_card_top">
+                            <div>
+                                <span class="order_number">Заказ №1408</span>
+                                <h2>Комплекс витаминов</h2>
+                                <p>Оформлен 4 октября 2026</p>
+                            </div>
+
+                            <span class="order_status">В обработке</span>
+                        </div>
+
+                        <div class="order_card_bottom">
+                            <span>1 товар</span>
+                            <strong>0 ₽</strong>
+                            <a href="">Подробнее -></a>
+                        </div>
+                    </article>
+
+                    <article class="order_card">
+                        <div class="order_card_top">
+                            <div>
+                                <span class="order_number">Заказ №1809</span>
+                                <h2>Магний</h2>
+                                <p>Оформлен 28 сентября 2026</p>
+                            </div>
+
+                            <span class="order_status">Доставляется</span>
+                        </div>
+
+                        <div class="order_card_bottom">
+                            <span>2 товара</span>
+                            <strong>0 ₽</strong>
+                            <a href="">Подробнее -></a>
+                        </div>
+                    </article>
+
+                    <article class="order_card">
+                        <div class="order_card_top">
+                            <div>
+                                <span class="order_number">Заказ №1234</span>
+                                <h2>Витамин D</h2>
+                                <p>Оформлен 15 сентября 2026</p>
+                            </div>
+
+                            <span class="order_status completed">Получен</span>
+                        </div>
+
+                        <div class="order_card_bottom">
+                            <span>1 товар</span>
+                            <strong>0 ₽</strong>
+                            <a href="">Подробнее -></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

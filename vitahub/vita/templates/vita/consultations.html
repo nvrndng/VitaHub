@@ -1,0 +1,123 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="consultations_page">
+        <div class="container">
+            <div class="consultations_page_heading">
+                <p class="section_subtitle">Личный кабинет</p>
+                <h1>Мои консультации</h1>
+                <p>Здесь вы можете посмотреть запланированные и проведенные консультации со специалистами.</p>
+            </div>
+
+            <div class="consultations_layout">
+                <aside class="consultations_sidebar">
+                    <div class="consultations_user_card">
+                        <div class="consultations_avatar">E</div>
+                        <h2>Егор</h2>
+                        <p>egor@example.com</p>
+                    </div>
+
+                    <nav class="consultations_navigation">
+                        <a href="">Мой профиль</a>
+                        <a href="">Мои заказы</a>
+                        <a href="" class="active">Мои консультации</a>
+                        <a href="">Мои баллы</a>
+                        <a href="">Результаты анализов</a>
+                    </nav>
+                </aside>
+
+                <div class="consultations_main">
+                    <div class="consultations_filters">
+                        <button class="consultations_filter active">Все</button>
+                        <button class="consultations_filter">Запланированные</button>
+                        <button class="consultations_filter">Прошедшие</button>
+                    </div>
+
+                    <div class="consultations_list">
+                        <article class="consultation_card">
+                            <div class="consultation_card_top">
+                                <div class="consultation_card_info">
+                                    <span class="consultation_category">Терапевт</span>
+                                    <h2>Иван Иванов</h2>
+                                    <p>Онлайн-чат</p>
+                                </div>
+
+                                <span class="consultation_status">Запланирована</span>
+                            </div>
+
+                            <div class="consultation_card_bottom">
+                                <div>
+                                    <span>Дата</span>
+                                    <strong>30 октября 2026</strong>
+                                </div>
+
+                                <div>
+                                    <span>Время</span>
+                                    <strong>15:00</strong>
+                                </div>
+
+                                <a href="">Подробнее -></a>
+                            </div>
+                        </article>
+
+                        <article class="consultation_card">
+                            <div class="consultation_card_top">
+                                <div class="consultation_card_info">
+                                    <span class="consultation_category">Диетолог</span>
+                                    <h2>Марина Иванова</h2>
+                                    <p>Видеозвонок</p>
+                                </div>
+
+                                <span class="consultation_status completed">Завершена</span>
+                            </div>
+
+                            <div class="consultation_card_bottom">
+                                <div>
+                                    <span>Дата</span>
+                                    <strong>5 октября 2026</strong>
+                                </div>
+
+                                <div>
+                                    <span>Время</span>
+                                    <strong>12:30</strong>
+                                </div>
+
+                                <a href="">Подробнее -></a>
+                            </div>
+                        </article>
+
+                        <article class="consultation_card">
+                            <div class="consultation_card_top">
+                                <div class="consultation_card_info">
+                                    <span class="consultation_category">Психолог</span>
+                                    <h2>Мария Волкова</h2>
+                                    <p>Онлайн-чат</p>
+                                </div>
+
+                                <span class="consultation_status completed">Завершена</span>
+                            </div>
+
+                            <div class="consultation_card_bottom">
+                                <div>
+                                    <span>Дата</span>
+                                    <strong>28 сентября 2026</strong>
+                                </div>
+
+                                <div>
+                                    <span>Время</span>
+                                    <strong>17:00</strong>
+                                </div>
+
+                                <a href="">Подробнее -></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

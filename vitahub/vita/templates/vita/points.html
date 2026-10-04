@@ -1,0 +1,99 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+  <section class="points_page">
+    <div class="container">
+      <div class="points_page_heding">
+        <p class="section_subtitle">Личный кабинет</p>
+        <h1>Мои баллы</h1>
+        <p>Следите за количеством накопленных баллов и историей их начисления.</p>
+      </div>
+
+      <div class="points_layout">
+        <aside class="points_sidebar">
+            <div class="points_user_card">
+              <div class="points_avatar">E</div>
+              <h2>Егор</h2>
+              <p>egor@example.ru</p>
+            </div>
+
+            <nav class="points_navigation">
+              <a href="">Мой профиль</a>
+              <a href="">Мои заказы</a>
+              <a href="">Мои консультации</a>
+              <a href="" class="active">Мои баллы</a>
+              <a href="">Результаты анализов</a>
+            </nav>
+        </aside>
+
+        <div class="points_main">
+          <div class="points_balance">
+            <div>
+              <span>Ваш баланс</span>
+              <h2>120</h2>
+              <p>баллов доступно сейчас</p>
+            </div>
+
+            <div class="points_balance_icon">★</div>
+          </div>
+
+          <div class="points_info">
+            <div class="points_info_icon">+</div>
+
+            <div>
+              <h2>Как получить баллы?</h2>
+
+              <p>Баллы начисляются за покупки в магазине и активность на форуме. Полученные баллы можно использовать в рамках системы бонусов портала.</p>
+            </div>
+          </div>
+
+          <div class="points_section">
+            <div class="points_section_heading">
+              <div>
+                <span>История</span>
+
+                <h2>Начисления баллов</h2>
+              </div>
+            </div>
+
+            <div class="points_history">
+              <div class="points_history_item">
+                <div class="points_history_icon">+</div>
+                <div class="points_history_content">
+                  <h3>Покупка в магазине</h3>
+                  <p>Заказ №1408 | 28 сентября 2026</p>
+                </div>
+
+                <strong>+50</strong>
+              </div>
+
+              <div class="points_history_item">
+                <div class="points_history_icon">+</div>
+                <div class="points_history_content">
+                  <h3>Активность на форуме</h3>
+                  <p>Ответ в теме | 25 сентября 2026</p>
+                </div>
+
+                <strong>+20</strong>
+              </div>
+
+              <div class="points_history_item">
+                <div class="points_history_icon">+</div>
+                <div class="points_history_content">
+                  <h3>Покупка в магазине</h3>
+                  <p>Заказ №1709 | 15 сентября 2026</p>
+                </div>
+
+                <strong> +50</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="profile_page">
+        <div class="container">
+            <div class="profile_page_heading">
+                <p class="section_subtitle">Личный кабинет</p>
+                <h1>Мой профиль</h1>
+                <p>Управляйте личными данными, заказами и консультациями.</p>
+            </div>
+
+            <div class="profile_layout">
+                <aside class="profile_sidebar">
+                    <div class="profile_user_card">
+                        <div class="profile_avatar">E</div>
+                        <h2>Егор</h2>
+
+                        <p>egor@example.ru</p>
+
+                        <a href="" class="profile_edit_button">Редактировать профиль</a>
+                    </div>
+
+                    <nav class="profile_navigation">
+                        <a href="" class="active">Мой профиль</a>
+                        <a href="">Мои заказы</a>
+                        <a href="">Мои консультации</a>
+                        <a href="">Мои баллы</a>
+                        <a href="">Результаты анализов</a>
+                    </nav>
+                </aside>
+
+                <div class="profile_main">
+                    <div class="profile_welcome">
+                        <div>
+                            <span>Добро пожаловать,</span>
+                            <h2>Егор</h2>
+                            <p>Здесь вы можете следить за активностью и управлять своим аккаунтом.</p>
+                        </div>
+
+                        <div class="profile_welcome_icon">♡</div>
+                    </div>
+
+                    <div class="profile_stats">
+
+                        <div class="profile_stat_card">
+                            <span>Баллы</span>
+                            <strong>120</strong>
+                            <p>Доступно сейчас</p>
+                        </div>
+
+                        <div class="profile_stat_card">
+                            <span>Заказы</span>
+                            <strong>3</strong>
+                            <p>Заказов</p>
+                        </div>
+
+                        <div class="profile_stat_card">
+                            <span>Консультации</span>
+                            <strong>2</strong>
+                            <p>Проведено</p>
+                        </div>
+                    </div>
+
+                    <div class="profile_section">
+                        <div class="profile_section_heading">
+                            <div>
+                                <span>Последняя активность</span>
+                                <h2>Мои заказы</h2>
+                            </div>
+
+                            <a href="">Все заказы -></a>
+                        </div>
+
+                        <div class="profile_order">
+                            <div>
+                                <span class="profile_order_number">Заказ №1408</span>
+                                <h3>Комлекс витаминов</h3>
+
+                                <p>1 товар | 0 ₽</p>
+                            </div>
+
+                            <span class="profile_order_status">В обработке</span>
+                        </div>
+
+                        <div class="profile_order">
+                            <div>
+                                <span class="profile_order_number">Заказ №1809</span>
+                                <h3>Магний</h3>
+
+                                <p>2 товара | 0 ₽</p>
+                            </div>
+
+                            <span class="profile_order_status completed">Получен</span>
+                        </div>
+                    </div>
+
+                    <div class="profile_section">
+                        <div class="profile_section_heading">
+                            <div>
+                                <span>Помощь специалистов</span>
+                                <h2>Мои консультации</h2>
+                            </div>
+
+                            <a href="">Все консультации -></a>
+                        </div>
+
+                        <div class="profile_consultation">
+                            <div class="profile_consultation_icon">💬</div>
+
+                            <div>
+                                <h3>Иван Иванов</h3>
+                                <p>Онлайн-чат | 29 октября 2026</p>
+                            </div>
+
+                            <span>Запланирована</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

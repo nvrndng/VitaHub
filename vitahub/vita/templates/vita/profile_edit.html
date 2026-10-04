@@ -1,0 +1,86 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="profile_edit_page">
+        <div class="container">
+            <div class="profile_edit_headint">
+                <p class="section_subtitle">Личный кабинет</p>
+                <h1>Редактирование профиля</h1>
+                <p>Измените личные данные, которые отображаются в вашем аккаунте.</p>
+            </div>
+
+            <div class="profile_edit_layout">
+                <div class="profile_edit_main">
+                    <form class="profile_edit_form">
+                        <div class="profile_edit_photo">
+                            <div class="profile_edit_avatar">E</div>
+
+                            <div>
+                                <h2>Фотография профиля</h2>
+                                <p>Фото будет отображаться в вашем профиле и на форуме.</p>
+
+                                <label for="profile_photo" class="profile_photo_button">Выбрать фотографию</label>
+
+                                <input type="file" id="profile_photo" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="profile_edit_section">
+                            <h2>Личные данные</h2>
+                            <div class="profile_edit_row">
+                                <div class="profile_form_group">
+                                    <label for="profile_first_name">Имя</label>
+                                    <input type="text" id="profile_first_name" value="Егор">
+                                </div>
+
+                                <div class="profile_form_group">
+                                    <label for="profile_last_name">Фамилия</label>
+                                    <input type="text" id="profile_last_name" value="Егоров">
+                                </div>
+                            </div>
+
+                            <div class="profile_form_group">
+                                <label for="profile_nickname">Никнейм на форуме</label>
+                                <input type="text" id="profile_nickname" value="Egor">
+                            </div>
+
+                            <div class="profile_form_group">
+                                <label for="profile_email">Email</label>
+                                <input type="email" id="profile_email" value="egor@example.ru">
+                            </div>
+
+                            <div class="profile_form_group">
+                                <label for="profile_phone">Телефон</label>
+                                <input type="tel" id="profile_phone" placeholder="+7 (___) ___-__-__">
+                            </div>
+                        </div>
+
+                        <div class="profile_edit_section">
+                            <h2>О себе</h2>
+                            <div class="profile_form_group">
+                                <label for="profile_about">Информация о себе</label>
+                                <textarea id="profile_about" placeholder="Расскажите пару слов о себе..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="profile_edit_actions">
+                            <a href="" class="profile_cancel_button">Отмена</a>
+                            <button type="submit" class="section_button">Сохранить изменения</button>
+                        </div>
+                    </form>
+                </div>
+
+                <aside class="profile_edit_sidebar">
+                    <div class="profile_edit_hint">
+                        <h3>Профиль VitaHub</h3>
+                        <p>Ваш профиль используется для участия на форуме, оформления заказов и записи на консультации.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
