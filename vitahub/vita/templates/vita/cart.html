@@ -1,0 +1,85 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="cart_page">
+        <div class="container">
+            <div class="cart_page_heading">
+                <p class="section_subtitle">Покупки</p>
+                <h1>Корзина</h1>
+                <p>Проверьте выбранные товары перед оформлением заказа.</p>
+            </div>
+
+            <div class="cart_layout">
+                <div class="cart_products">
+                    <div class="cart_product">
+                        <div class="cart_product_image">Витамины</div>
+
+                        <div class="cart_product_info">
+                            <span>Витамины</span>
+                            <h2>Комплекс витаминов</h2>
+                            <p>Комплекс витаминов для ежедневного рациона</p>
+                        </div>
+
+                        <div class="cart_product_quantity">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+
+                        <strong class="cart_product_price">0 ₽</strong>
+
+                        <button class="cart_product_remove">Удалить</button>
+                    </div>
+
+                    <div class="cart_product">
+                        <div class="cart_product_image">Минералы</div>
+
+                        <div class="cart_product_info">
+                            <span>Минералы</span>
+                            <h2>Магний</h2>
+                            <p>Минеральный комплекс для ежедневного рациона.</p>
+                        </div>
+
+                        <div class="cart_product_quantity">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+
+                        <strong class="cart_product_price">0 ₽</strong>
+
+                        <button class="cart_product_remove">Удалить</button>
+
+                    </div>
+                </div>
+
+                <aside class="cart_summary">
+                    <h2>Ваш заказ</h2>
+
+                    <div class="cart_summary_row">
+                        <span>Товары</span>
+                        <strong>2</strong>
+                    </div>
+
+                    <div class="cart_summary_row">
+                        <span>Количество</span>
+                        <strong>2 шт.</strong>
+                    </div>
+
+                    <div class="cart_summary_total">
+                        <span>Итого</span>
+                        <strong>0 ₽</strong>
+                    </div>
+
+                    <a href="" class="section_button">Оформить заказ</a>
+
+                    <a href="" class="cart_continue"><- Продолжить покупки</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

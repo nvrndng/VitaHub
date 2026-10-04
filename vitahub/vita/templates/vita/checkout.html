@@ -1,0 +1,144 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="checkout_page">
+        <div class="container">
+            <div class="checkout_page_heading">
+                <p class="section_subtitle">Покупки</p>
+                <h1>Оформление заказа</h1>
+                <p>Заполните данные для оформления и получения заказа.</p>
+            </div>
+
+            <div class="checkout_layout">
+                <div class="checkout_main">
+                    <div class="checkout_card">
+                        <h2>Контактные данные</h2>
+                        <div class="checkout_form_row">
+                            <div class="checkout_form_group">
+                                <label for="first_name">Имя</label>
+                                <input type="text" id="first_name" placeholder="Введите имя">
+                            </div>
+
+                            <div class="checkout_form_group">
+                                <label for="last_name">Фамилия</label>
+                                <input type="text" id="last_name" placeholder="Введите фамилию">
+                            </div>
+                        </div>
+
+                        <div class="checkout_form_group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+                        </div>
+
+                        <div class="checkout_form_group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="example@email.ru">
+                        </div>
+                    </div>
+
+                    <div class="checkout_card">
+                        <h2>Получение заказа</h2>
+
+                        <div class="checkout_delivery_options">
+                            <label class="checkout_delivery_option">
+                                <input type="radio" name="delivery" checked>
+
+                                <div>
+                                    <strong>Доставка</strong>
+                                    <p>Получение заказа по указанному адресу.</p>
+                                </div>
+                            </label>
+
+                            <label class="checkout_delivery_option">
+                                <input type="radio" name="delivery">
+
+                                <div>
+                                    <strong>Самовывоз</strong>
+                                    <p>Получение заказа в пункте выдачи.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="checkout_form_group">
+                            <label for="address">Адрес доставки</label>
+                            <input type="text" id="address" placeholder="Город, улица, дом, квартира">
+                        </div>
+
+                        <div class="checkout_form_group">
+                            <label for="comment">Комментарий к заказу</label>
+                            <textarea id="comment" placeholder="Дополнительная информация..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="checkout_card">
+                        <h2>Способ оплаты</h2>
+                        <div class="checkout_payment">
+                            <label class="checkout_payment_option">
+                                <input type="radio" name="payment" checked>
+
+                                <div>
+                                    <strong>Онлайн-оплата</strong>
+                                    <p>Оплата заказа банковской картой.</p>
+                                </div>
+                            </label>
+
+                            <label class="checkout_payment_option">
+                                <input type="radio" name="payment">
+
+                                <div>
+                                    <strong>При получении</strong>
+                                    <p>Оплата наличными при получении заказа.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="checkout_sidebar">
+                    <div class="checkout_summary">
+                        <h2>Ваш заказ</h2>
+                        <div class="checkout_summary_product">
+                            <div>
+                                <strong>Комплекс витаминов</strong>
+                                <span>1 x 0 ₽</span>
+                            </div>
+
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <div class="checkout_summary_product">
+                            <div>
+                                <strong>Магний</strong>
+                                <span>1 x 0 ₽</span>
+                            </div>
+
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <div class="checkout_summary_row">
+                            <span>Товары</span>
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <div class="checkout_summary_row">
+                            <span>Доставка</span>
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <div class="checkout_summary_total">
+                            <span>Итого</span>
+                            <strong>0 ₽</strong>
+                        </div>
+
+                        <button class="section_button checkout_submit">Оформить заказ</button>
+                        <p class="checkout_agreement">Нажимая кнопку, вы подтверждаете правильность указанных данных и соглашаетесь с условиями заказа.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
