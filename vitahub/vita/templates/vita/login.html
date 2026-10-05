@@ -1,0 +1,51 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="auth_page">
+        <div class="container">
+            <div class="auth_wrapper">
+                <div class="auth_heading">
+                    <p class="section_subtitle">Личный кабинет</p>
+                    <h1>Вход в VitaHub</h1>
+                    <p>Войдите в свой аккаунт, чтобы пользоваться всеми возможностями VitaHub.</p>
+                </div>
+
+                <form class="auth_form">
+                    <div class="auth_form_group">
+                        <label for="login_email">
+                            Email
+                        </label>
+
+                        <input type="email" id="login_email" placeholder="Введите email">
+                    </div>
+
+                    <div class="auth_form_group">
+                        <label for="login_password">Пароль</label>
+
+                        <input type="password" id="login_password" placeholder="Введите пароль">
+                    </div>
+
+                    <div class="auth_form_options">
+                        <label class="auth_checkbox">
+                            <input type="checkbox" id="remember_me">
+                            <span>Запомнить меня</span>
+                        </label>
+
+                        <a href="">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="section_button auth_submit">Войти</button>
+
+                    <div class="auth_register">
+                        <span>Нет аккаунта?</span>
+                        <a href="">Зарегистрироваться</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

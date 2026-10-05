@@ -1,0 +1,67 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+  <section class="auth_page">
+    <div class="container">
+      <div class="auth_wrapper">
+        <div class="auth_heading">
+          <p class="section_subtitle">Личный кабинет</p>
+
+          <h1>Регистрация на VitaHub</h1>
+          <p>Создайте аккаунт, чтобы пользоваться всеми возможностями VitaHub.</p>
+        </div>
+
+        <form class="auth_form">
+          <div class="auth_form_row">
+            <div class="auth_form_group">
+              <label for="register_first_name">Имя</label>
+
+              <input type="text" id="register_first_name" placeholder="Введите имя">
+            </div>
+
+            <div class="auth_form_group">
+              <label for="register_last_name">Фамилия</label>
+
+              <input type="text" id="register_last_name" placeholder="Введите фамилию">
+            </div>
+
+            <div class="auth_form_group">
+              <label for="register_email">Email</label>
+
+              <input type="email" id="register_email" placeholder="Введите email">
+            </div>
+
+            <div class="auth_form_group">
+              <label for="register_password">Пароль</label>
+
+              <input type="password" id="register_password" placeholder="Придумайте пароль">
+            </div>
+
+            <div class="auth_form_group">
+              <label for="register_password_confirm">Подтверждение пароля</label>
+
+              <input type="password" id="register_password_confirm" placeholder="Подтвердите пароль">
+            </div>
+
+            <label class="auth_agreement">
+              <input type="checkbox" id="register_agreement">
+
+              <span>Я согласен с условиями пользования сервисом VitaHub</span>
+            </label>
+
+            <button type="submit" class="section_button auth_submit">Зарегистрироваться</button>
+
+            <div class="auth_register">
+              <span>Уже есть аккаунт?</span>
+              <a href="">Войти</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

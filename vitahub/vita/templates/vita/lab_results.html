@@ -1,0 +1,101 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+
+<main>
+    <section class="lab_results_page">
+        <div class="lab_results_page_heading">
+            <p class="section_subtitle">Личный кабинет</p>
+            <h1>Результаты анализов</h1>
+            <p>Загружайте и храните результаты медицинских анализов в одном месте и просматривайте их в любое время.</p>
+        </div>
+
+        <div class="lab_results_layout">
+            <aside class="lab_results_sidebar">
+                <div class="lab_results_user_card">
+                    <div class="lab_results_avatar">E</div>
+                    <h2>Егор</h2>
+                    <p>egor@example.ru</p>
+                </div>
+
+                <nav class="lab_results_navigation">
+                    <a href="">Мой профиль</a>
+                    <a href="">Мои заказы</a>
+                    <a href="">Мои консультации</a>
+                    <a href="">Мои баллы</a>
+                    <a href="" class="active">Результаты анализов</a>
+                </nav>
+            </aside>
+
+            <div class="lab_results_main">
+                <div class="lab_results_upload">
+                    <div class="lab_results_upload_icon">+</div>
+
+                    <div class="lab_results_upload_content">
+                        <h2>Загрузить результаты анализов</h2>
+                        <p>Вы можете добавить результаты анализов в формате PDF или изображения.</p>
+                    </div>
+
+                    <button class="section_button">Загрузить файл</button>
+                </div>
+
+                <div class="lab_results_section">
+                    <div class="lab_results_section_heading">
+                        <div>
+                            <span>Ваши документы</span>
+                            <h2>Загруженные результаты</h2>
+                        </div>
+
+                        <span class="lab_results_count">3 файла</span>
+                    </div>
+
+                    <div class="lab_results_list">
+                        <article class="lab_result_card">
+                            <div class="lab_result_icon">PDF</div>
+                            <div class="lab_result_content">
+                                <h3>Общий анализ крови</h3>
+                                <p>Загружен 2 октября 2026</p>
+                            </div>
+
+                            <span class="lab_result_type">PDF</span>
+                            <a href="">Открыть -></a>
+                        </article>
+
+                        <article class="lab_result_card">
+                            <div class="lab_result_icon">JPG</div>
+                            <div class="lab_result_content">
+                                <h3>Биохимический анализ крови</h3>
+                                <p>Загружен 20 сентября 2026</p>
+                            </div>
+
+                            <span class="lab_result_type">JPG</span>
+                            <a href="">Открыть -></a>
+                        </article>
+
+                        <article class="lab_result_card">
+                            <div class="lab_result_icon">PDF</div>
+                            <div class="lab_result_content">
+                                <h3>Кардиограмма</h3>
+                                <p>Загружен 12 сентября 2026</p>
+                            </div>
+
+                            <span class="lab_result_type">PDF</span>
+                            <a href="">Открыть -></a>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="lab_results_warning">
+                    <div class="lab_results_warning_icon">!</div>
+
+                    <div>
+                        <h3>Важная информация</h3>
+                        <p>Загруженные результаты предназначены для ознакомления и хранения. Они не заменят консультацию со специалистом.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
