@@ -2,11 +2,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from .models import Article, ArticleCategory, Specialist, Profile, ForumTopic, ForumPost, Product, ProductCategory, Order, OrderItem, Consultation, LabResult
+from .models import Article, ArticleCategory, Specialist, Profile, ForumTopic, ForumPost, Product, ProductCategory, Order, OrderItem, Consultation, LabResult, PointTransaction
 from decimal import Decimal
 from django.contrib import messages
 from django.utils import timezone
-from django.utils.dateparse import parse_datetime
+from django.utils.dateparse import parse_datetime, parse_date
 from django.db import transaction
 from .forms import RegisterForm, ProfileForm
 from django.http import FileResponse, Http404
@@ -16,7 +16,13 @@ from pathlib import Path
 
 
 def home(request):
-    return render(request, 'vita/home.html')
+    articles = (Article.objects.filter(is_published=True).select_related('category', 'author').order_by('-created_at')[:3])
+
+    forum_topics = (ForumTopic.objects.select_related('author').prefetch_related('posts').order_by('-created_at')[:3])
+
+    products = (Product.objects.filter(is_active=True, stock__gt=0).select_related('category').order_by('-created_at')[:3])
+
+    return render(request, 'vita/home.html', {'articles': articles, 'forum_topics': forum_topics,'products': products})
 
 
 def register_view(request):
@@ -364,6 +370,7 @@ def cart_remove_view(request, product_id):
 
 @login_required
 def checkout_view(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
     cart = request.session.get('cart', {})
     product_ids = [
         int(product_id)
@@ -397,12 +404,40 @@ def checkout_view(request):
             'total': item_total,
         })
 
+
+    points_to_use = 0
+
+    if request.method == 'POST':
+        try:
+            points_to_use = int(request.POST.get('points_to_use', '0'))
+        except (TypeError, ValueError):
+            points_to_use = 0
+
+
+    discount_preview = min (max(points_to_use, 0), int(total_price))
+
     context = {
         'cart_items': cart_items,
         'total_price': total_price,
+        'profile_points': profile.points,
+        'points_to_use': points_to_use,
+        'discount_preview': discount_preview,
+        'discounted_total': max(total_price - Decimal(discount_preview), Decimal('0.00')),
         'error': '',
         'form_data': request.POST if request.method == 'POST' else {},
     }
+
+    if points_to_use < 0:
+        context['error'] = 'Количество баллов не может быть отрицательным.'
+        return render(request, 'vita/checkout.html', context)
+
+    if points_to_use > profile.points:
+        context['error'] = 'У вас недостаточно баллов для этой скидки.'
+        return render(request, 'vita/checkout.html', context)
+
+    if Decimal(points_to_use) > total_price:
+        context['error'] = 'Скидка не может превышать стоимость товаров.'
+        return render(request, 'vita/checkout.html', context)
 
     if not cart_items:
         return redirect('cart')
@@ -442,8 +477,7 @@ def checkout_view(request):
                     product.id: product
                     for product in Product.objects.select_for_update().filter(
                         id__in=product_ids,
-                        is_active=True
-                    )
+                        is_active=True)
                 }
 
                 order_lines = []
@@ -468,12 +502,22 @@ def checkout_view(request):
                     actual_total += line_total
                     order_lines.append((product, quantity))
 
+                locked_profile = Profile.objects.select_for_update().get(user=request.user)
+
+                if points_to_use > locked_profile.points:
+                    raise ValueError('Баланс баллов изменился. Обновите страницу и попробуйте снова.')
+
+                if Decimal(points_to_use) > actual_total:
+                    raise ValueError('Скидка не может превышать стоимость товаров.')
+
+                final_total = actual_total - Decimal(points_to_use)
+
                 request.user.first_name = first_name
                 request.user.last_name = last_name
                 request.user.email = email
                 request.user.save(update_fields=['first_name', 'last_name', 'email'])
 
-                order = Order.objects.create(user=request.user, total=actual_total, phone=phone, address=address, delivery_method=delivery_method, payment_method=payment_method, comment=comment)
+                order = Order.objects.create(user=request.user, total=final_total, points_spent=points_to_use, phone=phone, address=address, delivery_method=delivery_method, payment_method=payment_method, comment=comment)
 
                 for product, quantity in order_lines:
                     OrderItem.objects.create(user=order, product=product, quantity=quantity, price=product.price)
@@ -481,8 +525,15 @@ def checkout_view(request):
                     product.stock -= quantity
                     product.save(update_fields=['stock'])
 
+                if points_to_use > 0:
+                    locked_profile.points -= points_to_use
+                    locked_profile.save(update_fields=['points'])
+
+                    PointTransaction.objects.create(user=request.user, amount=-points_to_use, reason=f'Списание баллов за заказ №{order.pk}')
+
         except ValueError as exc:
             context['error'] = str(exc)
+            context['profile_points'] = Profile.objects.get(user=request.user).points
             return render(request, 'vita/checkout.html', context)
 
         request.session['cart'] = {}
@@ -570,7 +621,6 @@ def lab_results_view(request):
             error = 'Размер файла не должен превышать 10 МБ.'
 
         if not error and result_date_value:
-            from django.utils.dateparse import parse_date
             result_date = parse_date(result_date_value)
 
             if result_date is None:
@@ -618,4 +668,15 @@ def lab_result_download_view(request, result_id):
         raise Http404('Файл не найден.')
 
     return FileResponse(file_handle, as_attachment=True, filename=Path(result.file.name).name)
+
+
+
+
+@login_required
+def points_view(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    transactions = PointTransaction.objects.filter(user=request.user).order_by('-created_at')
+
+    return render(request, 'vita/points.html', {'profile': profile, 'transactions': transactions})
 

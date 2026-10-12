@@ -152,5 +152,11 @@ urlpatterns = [
         name='lab_result_download'
     ),
 
+    path(
+        'points/',
+        views.points_view,
+        name='points'
+    ),
+
 
 ]

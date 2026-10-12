@@ -17,8 +17,8 @@
         </p>
 
         <div class="hero_buttons">
-          <a href="" class="button button_one">Читать статьи</a>
-          <a href="" class="button button_two">Найти специалиста</a>
+          <a href="{% url 'articles' %}" class="button button_one">Читать статьи</a>
+          <a href="{% url 'specialists' %}" class="button button_two">Найти специалиста</a>
         </div>
 
       </div>
@@ -51,28 +51,28 @@
         <div class="features_grid">
 
 
-          <a href="" class="feature_card">
+          <a href="{% url 'articles' %}" class="feature_card">
             <h3>Статьи</h3>
             <p>Полезные материалы о здоровье и здоровом образе жизни.</p>
             <span class="feature_link">Читать статьи</span>
           </a>
 
 
-          <a href="" class="feature_card">
+          <a href="{% url 'forum' %}" class="feature_card">
             <h3>Форум</h3>
             <p>Общайтесь с другими пользователями и делитесь своим опытом.</p>
             <span class="feature_link">Перейти на форум</span>
           </a>
 
 
-          <a href="" class="feature_card">
+          <a href="{% url 'specialists' %}" class="feature_card">
             <h3>Консультации</h3>
             <p>Выберите специалиста и получите дистанционную консультацию.</p>
             <span class="feature_link">Выбрать специалиста</span>
           </a>
 
 
-          <a href="" class="feature_card">
+          <a href="{% url 'shop' %}" class="feature_card">
             <h3>Магазин</h3>
             <p>Выбор и заказ товаров для здоровья онлайн.</p>
             <span class="feature_link">Перейти в магазин</span>
@@ -93,42 +93,33 @@
           <p> Узнайте больше о здоровье и здоровом образе жизни.</p>
         </div>
 
-        <a href="" class="section_button">Все статьи</a>
+        <a href="{% url 'articles' %}" class="section_button">Все статьи</a>
       </div>
 
       <div class="articles_grid">
-        <article class="article_card">
-          <div class="article_image">Здоровье</div>
-          <div class="article_content">
-            <span class="article_category">Здоровый образ жизни</span>
-            <h3>Как поддерживать здоровый образ жизни</h3>
-            <p>Полезные привычки, которые помогают заботиться о здоровье каждый день.</p>
+        {% for article in articles %}
+          <article class="article_card">
+            <div class="article_image">
+              {% if article.image %}
+                <img src="{{ article.image.url }}" alt="{{ article.title }}">
+              {% else %}
+                Здоровье
+              {% endif %}
+            </div>
 
-            <a href="" class="article_link">Читать статью</a>
-          </div>
-        </article>
+            <div class="article_content">
+              <span class="article_category">{{ article.category }}</span>
 
-        <article class="article_card">
-          <div class="article_image">Питание</div>
-          <div class="article_content">
-            <span class="article_category">Питание</span>
-            <h3>Основы правильного питания</h3>
-            <p>Принципы сбалансированного питания и ежедневного рациона.</p>
+              <h3>{{ article.title }}</h3>
 
-            <a href="" class="article_link">Читать статью</a>
-          </div>
-        </article>
+              <p>{{ article.short_description|default:article.content|truncatewords:18 }}</p>
 
-        <article class="article_card">
-          <div class="article_image">Витамины</div>
-          <div class="article_content">
-            <span class="article_category">Витамины и БАДы</span>
-            <h3>Как БАДы помогают профилактике заболеваний</h3>
-            <p>Что такое БАДы, профилактика и почему это важно.</p>
-
-            <a href="" class="article_link">Читать статью</a>
-          </div>
-        </article>
+              <a href="{% url 'article_detail' article.id %}" class="article_link">Читать статью</a>
+            </div>
+          </article>
+        {% empty %}
+          <p>Пока нет опубликованных статей.</p>
+        {% endfor %}
 
       </div>
     </div>
@@ -147,56 +138,27 @@
             Обсуждайте вопросы здоровья и делитесь своим опытом вместе.
           </p>
         </div>
-        <a href="" class="section_button">
+        <a href="{% url 'forum' %}" class="section_button">
           Перейти на форум
         </a>
       </div>
 
       <div class="forum_topics">
-        <a href="" class="forum_topic">
-          <div class="forum_topic_icon">
+        {% for topic in forum_topics %}
+          <a href="{% url 'forum_topic' topic.id %}" class="forum_topic">
+            <div class="forum_topic_icon"></div>
 
-          </div>
-          <div class="forum_topic_content">
-            <h3>Как наладить режим сна?</h3>
-            <p>Всем добрый день! Подскажите, пожалуйста, как вы выстраивали режим сна и какие привычки вам помогли?</p>
-            <span>12 ответов</span>
-          </div>
+            <div class="forum_topic_content">
+              <h3>{{ topic.title }}</h3>
+              <p>{{ topic.content|truncatewords:22 }}</p>
+              <span>{{ topic.posts.count }} ответов</span>
+            </div>
 
-          <div class="forum_topic_arrow">
-            ->
-          </div>
-        </a>
-
-        <a href="" class="forum_topic">
-          <div class="forum_topic_icon">
-
-          </div>
-          <div class="forum_topic_content">
-            <h3>Как правильно составить рацион?</h3>
-            <p>Обсуждаем сбалансированное питание для похудения или набора массы.</p>
-            <span>8 ответов</span>
-          </div>
-
-          <div class="forum_topic_arrow">
-            ->
-          </div>
-        </a>
-
-        <a href="" class="forum_topic">
-          <div class="forum_topic_icon">
-
-          </div>
-          <div class="forum_topic_content">
-            <h3>Поделитесь опытом тренировок</h3>
-            <p>Какие тренировки наиболее эффективно помогают поддерживать форму?</p>
-            <span>21 ответ</span>
-          </div>
-
-          <div class="forum_topic_arrow">
-            ->
-          </div>
-        </a>
+            <div class="forum_topic_arrow">-></div>
+          </a>
+        {% empty %}
+          <p>Пока нет тем для обсуждения.</p>
+        {% endfor %}
       </div>
     </div>
 
@@ -212,54 +174,37 @@
           <p>Выбирайте товары для здоровья и заказывайте онлайн</p>
         </div>
 
-        <a href="" class="section_button">Перейти в магазин</a>
+        <a href="{% url 'shop' %}" class="section_button">Перейти в магазин</a>
       </div>
 
       <div class="shop_products">
-        <a href="" class="product_card">
-          <div class="product_image">Витамины</div>
-
-          <div class="product_content">
-            <span class="product_category">Витамины</span>
-            <h3>Комплекс витаминов</h3>
-            <p>Комплекс витаминов для ежедневного рациона.</p>
-
-            <div class="product_bottom">
-              <span class="product_price">0 ₽</span>
-              <span class="product_link">Подробнее</span>
+        {% for product in products %}
+          <a href="{% url 'product_detail' product.id %}" class="product_card">
+            <div class="product_image">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              {% else %}
+                {{ product.category|default:"Товар" }}
+              {% endif %}
             </div>
-          </div>
-        </a>
 
-        <a href="" class="product_card">
-          <div class="product_image">Питание</div>
+            <div class="product_content">
+              <span class="product_category">{{ product.category|default:"Товары для здоровья" }}</span>
 
-          <div class="product_content">
-            <span class="product_category">Спортивное питание</span>
-            <h3>Протеиновый комплекс</h3>
-            <p>Источник белка для активного образа жизни.</p>
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.description|truncatewords:18 }}</p>
 
-            <div class="product_bottom">
-              <span class="product_price">0 ₽</span>
-              <span class="product_link">Подробнее</span>
+              <div class="product_bottom">
+                <span class="product_price">{{ product.price|floatformat:2 }} ₽</span>
+                <span class="product_link">Подробнее</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        {% empty %}
+          <p>Пока нет доступных товаров в наличии.</p>
+        {% endfor %}
 
-        <a href="" class="product_card">
-          <div class="product_image">Уход</div>
 
-          <div class="product_content">
-            <span class="product_category">Уход</span>
-            <h3>Увлажняющий крем</h3>
-            <p>Средство для ежедневного ухода за кожей.</p>
-
-            <div class="product_bottom">
-              <span class="product_price">0 ₽</span>
-              <span class="product_link">Подробнее</span>
-            </div>
-          </div>
-        </a>
       </div>
     </div>
 

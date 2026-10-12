@@ -155,6 +155,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='orders')
     status = models.CharField('Статус', choices=Status.choices, default=Status.NEW, max_length=20)
     total = models.DecimalField('Сумма заказа', max_digits=10, decimal_places=2, default=0)
+    points_spent = models.PositiveIntegerField('Потрачено баллов', default=0)
     phone = models.CharField('Телефон для связи', max_length=30)
     address = models.CharField('Адрес доставки', max_length=300)
     delivery_method = models.CharField('Способ получения', max_length=20, choices=[('delivery', 'Доставка'), ('pickup', 'Самовывоз')], default='delivery')
