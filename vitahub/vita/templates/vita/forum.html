@@ -38,7 +38,7 @@
 
                         <p>{{ topic.content|truncatewords:30 }}</p>
 
-                        <span>Автор: {{ topic.author.username }}</span>
+                        <span>Автор: {{ topic.author.profile.nickname|default:topic.author.first_name|default:topic.author.username }}</span>
                     </article>
                 {% empty %}
                     <p>Пока тем нет. Создай первую тему!</p>

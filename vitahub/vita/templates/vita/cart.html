@@ -13,70 +13,95 @@
 
             <div class="cart_layout">
                 <div class="cart_products">
-                    <div class="cart_product">
-                        <div class="cart_product_image">Витамины</div>
+                    {% for item in cart_items %}
+                        <div class="cart_product">
 
-                        <div class="cart_product_info">
-                            <span>Витамины</span>
-                            <h2>Комплекс витаминов</h2>
-                            <p>Комплекс витаминов для ежедневного рациона</p>
+                            <div class="cart_product_image">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% else %}
+                                    {{ item.product.name }}
+                                {% endif %}
+                            </div>
+
+                            <div class="cart_product_info">
+
+                                {% if item.product.category %}
+                                    <span>{{ item.product.category.name }}</span>
+                                {% endif %}
+
+                                <h2>{{ item.product.name }}</h2>
+
+                                <p>{{ item.product.description|truncatewords:12 }}</p>
+
+                            </div>
+
+                            <div class="cart_product_quantity">
+
+                                <form method="post" action="{% url 'cart_update' item.product.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="decrease">
+                                    <button type="submit" aria-label="Уменьшить количество">-</button>
+                                </form>
+
+                                <span>{{ item.quantity }}</span>
+
+                                <form method="post" action="{% url 'cart_update' item.product.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="increase">
+                                    <button type="submit" aria-label="Увеличить количество" {% if item.quantity >= item.product.stock %}disabled{% endif %} >+</button>
+                                </form>
+
+                            </div>
+
+                            <strong class="cart_product_price">{{ item.total|floatformat:2 }} ₽</strong>
+
+                            <form method="post" action="{% url 'cart_remove' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="cart_product_remove">Удалить</button>
+                            </form>
+
+                        </div>
+                    {% empty %}
+
+                        <div class="cart_empty">
+                            <h2>Ваша корзина пока пуста</h2>
+                            <p>Загляните в магазин и добавьте товары,
+                                которые хотите приобрести.</p>
+                            <a href="{% url 'shop' %}" class="section_button">Перейти в магазин</a>
                         </div>
 
-                        <div class="cart_product_quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
+                    {% endfor %}
 
-                        <strong class="cart_product_price">0 ₽</strong>
-
-                        <button class="cart_product_remove">Удалить</button>
-                    </div>
-
-                    <div class="cart_product">
-                        <div class="cart_product_image">Минералы</div>
-
-                        <div class="cart_product_info">
-                            <span>Минералы</span>
-                            <h2>Магний</h2>
-                            <p>Минеральный комплекс для ежедневного рациона.</p>
-                        </div>
-
-                        <div class="cart_product_quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-
-                        <strong class="cart_product_price">0 ₽</strong>
-
-                        <button class="cart_product_remove">Удалить</button>
-
-                    </div>
                 </div>
 
                 <aside class="cart_summary">
+
                     <h2>Ваш заказ</h2>
 
                     <div class="cart_summary_row">
                         <span>Товары</span>
-                        <strong>2</strong>
+                        <strong>{{ total_products }}</strong>
                     </div>
 
                     <div class="cart_summary_row">
                         <span>Количество</span>
-                        <strong>2 шт.</strong>
+                        <strong>{{ total_quantity }} шт.</strong>
                     </div>
 
                     <div class="cart_summary_total">
                         <span>Итого</span>
-                        <strong>0 ₽</strong>
+                        <strong>{{ total_price|floatformat:2 }} ₽</strong>
                     </div>
 
-                    <a href="" class="section_button">Оформить заказ</a>
+                    {% if cart_items %}
+                        <a href="{% url 'checkout' %}" class="section_button">Оформить заказ</a>
+                    {% endif %}
 
-                    <a href="" class="cart_continue"><- Продолжить покупки</a>
+                    <a href="{% url 'shop' %}" class="cart_continue"><- Продолжить покупки</a>
+
                 </aside>
+
             </div>
         </div>
     </section>

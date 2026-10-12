@@ -1,7 +1,6 @@
 {% extends 'vita/base.html' %}
 
 {% block content %}
-
 <main>
     <section class="consultations_page">
         <div class="container">
@@ -14,110 +13,101 @@
             <div class="consultations_layout">
                 <aside class="consultations_sidebar">
                     <div class="consultations_user_card">
-                        <div class="consultations_avatar">E</div>
-                        <h2>Егор</h2>
-                        <p>egor@example.com</p>
+                        <div class="consultations_avatar">
+                            {{ request.user.first_name|default:request.user.username|first|upper }}
+                        </div>
+                        <h2>{{ request.user.get_full_name|default:request.user.username }}</h2>
+                        <p>{{ request.user.email }}</p>
                     </div>
 
                     <nav class="consultations_navigation">
-                        <a href="">Мой профиль</a>
-                        <a href="">Мои заказы</a>
-                        <a href="" class="active">Мои консультации</a>
-                        <a href="">Мои баллы</a>
-                        <a href="">Результаты анализов</a>
+                        <a href="{% url 'profile' %}">Мой профиль</a>
+                        <a href="{% url 'orders' %}">Мои заказы</a>
+                        <a href="{% url 'consultations' %}" class="active">Мои консультации</a>
+                        <a href="{% url 'points' %}">Мои баллы</a>
+                        <a href="{% url 'lab_results' %}">Результаты анализов</a>
                     </nav>
                 </aside>
 
                 <div class="consultations_main">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="consultations_message">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+
                     <div class="consultations_filters">
-                        <button class="consultations_filter active">Все</button>
-                        <button class="consultations_filter">Запланированные</button>
-                        <button class="consultations_filter">Прошедшие</button>
+                        <a href="{% url 'consultations' %}" class="consultations_filter {% if selected_filter == 'all' %}active{% endif %}">Все</a>
+
+                        <a href="{% url 'consultations' %}?filter=upcoming" class="consultations_filter {% if selected_filter == 'upcoming' %}active{% endif %}">Запланированные</a>
+
+                        <a href="{% url 'consultations' %}?filter=past" class="consultations_filter {% if selected_filter == 'past' %}active{% endif %}">Прошедшие</a>
                     </div>
 
                     <div class="consultations_list">
-                        <article class="consultation_card">
-                            <div class="consultation_card_top">
-                                <div class="consultation_card_info">
-                                    <span class="consultation_category">Терапевт</span>
-                                    <h2>Иван Иванов</h2>
-                                    <p>Онлайн-чат</p>
+                        {% for consultation in consultations %}
+                            <article class="consultation_card">
+                                <div class="consultation_card_top">
+                                    <div class="consultation_card_info">
+                                        <span class="consultation_category">
+                                            {{ consultation.specialist.specialization }}
+                                        </span>
+
+                                        <h2>{{ consultation.specialist.user.get_full_name|default:consultation.specialist.user.username }}</h2>
+
+                                        <p>{{ consultation.get_consultation_format_display }}</p>
+                                    </div>
+
+                                    <span class="consultation_status {% if consultation.status == 'completed' %}completed{% endif %}">
+                                        {{ consultation.get_status_display }}
+                                    </span>
                                 </div>
 
-                                <span class="consultation_status">Запланирована</span>
+                                <div class="consultation_card_bottom">
+                                    <div>
+                                        <span>Дата</span>
+                                        <strong>{{ consultation.scheduled_at|date:"d.m.Y" }}</strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Время</span>
+                                        <strong>{{ consultation.scheduled_at|date:"H:i" }}</strong>
+                                    </div>
+
+                                    {% if consultation.notes %}
+                                        <span>{{ consultation.notes|truncatechars:80 }}</span>
+                                    {% endif %}
+
+                                    {% if consultation.status == 'requested' or consultation.status == 'confirmed' %}
+                                        {% if consultation.scheduled_at > now %}
+                                            <form method="post" action="{% url 'cancel_consultation' consultation.id %}" onsubmit="return confirm('Вы действительно хотите отменить запись?');">
+                                                {% csrf_token %}
+                                                <button type="submit" class="section_button">Отменить запись</button>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </article>
+                        {% empty %}
+                            <div class="consultation_card">
+                                <h2>Консультаций пока нет</h2>
+                                <p>
+                                    {% if selected_filter == 'upcoming' %}
+                                        У вас нет запланированных консультаций.
+                                    {% elif selected_filter == 'past' %}
+                                        У вас пока нет прошедших консультаций.
+                                    {% else %}
+                                        Выберите специалиста и запишитесь на консультацию.
+                                    {% endif %}
+                                </p>
+
+                                <a href="{% url 'specialists' %}" class="section_button">Выбрать специалиста</a>
                             </div>
-
-                            <div class="consultation_card_bottom">
-                                <div>
-                                    <span>Дата</span>
-                                    <strong>30 октября 2026</strong>
-                                </div>
-
-                                <div>
-                                    <span>Время</span>
-                                    <strong>15:00</strong>
-                                </div>
-
-                                <a href="">Подробнее -></a>
-                            </div>
-                        </article>
-
-                        <article class="consultation_card">
-                            <div class="consultation_card_top">
-                                <div class="consultation_card_info">
-                                    <span class="consultation_category">Диетолог</span>
-                                    <h2>Марина Иванова</h2>
-                                    <p>Видеозвонок</p>
-                                </div>
-
-                                <span class="consultation_status completed">Завершена</span>
-                            </div>
-
-                            <div class="consultation_card_bottom">
-                                <div>
-                                    <span>Дата</span>
-                                    <strong>5 октября 2026</strong>
-                                </div>
-
-                                <div>
-                                    <span>Время</span>
-                                    <strong>12:30</strong>
-                                </div>
-
-                                <a href="">Подробнее -></a>
-                            </div>
-                        </article>
-
-                        <article class="consultation_card">
-                            <div class="consultation_card_top">
-                                <div class="consultation_card_info">
-                                    <span class="consultation_category">Психолог</span>
-                                    <h2>Мария Волкова</h2>
-                                    <p>Онлайн-чат</p>
-                                </div>
-
-                                <span class="consultation_status completed">Завершена</span>
-                            </div>
-
-                            <div class="consultation_card_bottom">
-                                <div>
-                                    <span>Дата</span>
-                                    <strong>28 сентября 2026</strong>
-                                </div>
-
-                                <div>
-                                    <span>Время</span>
-                                    <strong>17:00</strong>
-                                </div>
-
-                                <a href="">Подробнее -></a>
-                            </div>
-                        </article>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
-
 {% endblock %}

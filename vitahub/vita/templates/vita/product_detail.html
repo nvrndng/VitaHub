@@ -5,51 +5,92 @@
 <main>
     <section class="product_detail_page">
         <div class="container">
+
             <div class="product_detail_back">
-                <a href=""><- Вернуться в магазин</a>
+                <a href="{% url 'shop' %}"><- Вернуться в магазин</a>
             </div>
 
             <div class="product_detail_wrapper">
+
                 <div class="product_detail_main">
+
                     <div class="product_detail_top">
-                        <div class="product_detail_image">Витамины</div>
+
+                        <div class="product_detail_image">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <span>{{ product.name }}</span>
+                            {% endif %}
+                        </div>
 
                         <div class="product_detail_info">
-                            <span class="product_detail_category">Витамины</span>
-                            <h1>Комплекс витаминов</h1>
-                            <p class="product_detail_description">Комплекс витаминов для ежедневного рациона. Подходит для дополнения сбалансированного питания.</p>
+
+                            {% if product.category %}
+                                <span class="product_detail_category">{{ product.category.name }}</span>
+                            {% endif %}
+
+                            <h1>{{ product.name }}</h1>
+
+                            <p class="product_detail_description">{{ product.description|linebreaksbr }}</p>
 
                             <div class="product_detail_price">
-                                <strong>0 ₽</strong>
+                                <strong>{{ product.price }} ₽</strong>
                             </div>
 
-                            <button class="section_button">Добавить в корзину</button>
+                            {% if product.stock > 0 %}
+                                <p class="product_detail_stock">В наличии: {{ product.stock }} шт.</p>
+
+                                <button type="button" class="section_button">Добавить в корзину</button>
+                            {% else %}
+                                <p class="product_detail_stock">Товара сейчас нет в наличии.</p>
+
+                                <button type="button" class="section_button" disabled>Нет в наличии</button>
+                            {% endif %}
+
                         </div>
                     </div>
 
                     <div class="product_detail_section">
                         <h2>Описание товара</h2>
-                        <p>Комплекс витаминов, предназначенный для дополнения ежедневного рациона. Перед применением рекомендуется ознакомиться с информацией о составе и особенностях продукта.</p>
-                        <p>Товар является частью ассортимента магазина VitaHub.</p>
+
+                        {% if product.description %}
+                            <p>{{ product.description|linebreaksbr }}</p>
+                        {% else %}
+                            <p>Описание этого товара пока не добавлено.</p>
+                        {% endif %}
                     </div>
 
                     <div class="product_detail_section">
                         <h2>Характеристики</h2>
 
                         <div class="product_characteristics">
+
+                            <div class="product_characteristic">
+                                <span>Название</span>
+                                <strong>{{ product.name }}</strong>
+                            </div>
+
                             <div class="product_characteristic">
                                 <span>Категория</span>
-                                <strong>Витамины</strong>
+                                <strong>
+                                    {% if product.category %}
+                                        {{ product.category.name }}
+                                    {% else %}
+                                        Не указана
+                                    {% endif %}
+                                </strong>
                             </div>
 
                             <div class="product_characteristic">
-                                <span>Формат</span>
-                                <strong>Комплекс</strong>
-                            </div>
-
-                            <div class="product_characteristic">
-                                <span>Количество</span>
-                                <strong>30 порций</strong>
+                                <span>Наличие</span>
+                                <strong>
+                                    {% if product.stock > 0 %}
+                                        В наличии
+                                    {% else %}
+                                        Нет в наличии
+                                    {% endif %}
+                                </strong>
                             </div>
 
                         </div>
@@ -57,27 +98,51 @@
 
                     <div class="product_detail_section">
                         <h2>Важно</h2>
+
                         <div class="product_warning">
                             <span>!</span>
-                            <p>Информация о товаре предназначена для ознакомления и не заменяет консультацию со специалистом.</p>
+                            <p>
+                                Информация о товаре предназначена для ознакомления
+                                и не заменяет консультацию со специалистом.
+                                Перед использованием товаров для здоровья
+                                ознакомьтесь с инструкцией производителя.
+                            </p>
                         </div>
                     </div>
+
                 </div>
 
                 <aside class="product_detail_sidebar">
                     <div class="product_cart_card">
+
                         <h3>Ваш заказ</h3>
 
-                        <p>Добавьте товар в корзину, чтобы продолжить оформление заказа.</p>
+                        <p>
+                            Добавьте товар в корзину, чтобы продолжить
+                            оформление заказа.
+                        </p>
 
                         <div class="product_cart_row">
                             <span>Стоимость</span>
-                            <strong>0 ₽</strong>
+                            <strong>{{ product.price }} ₽</strong>
                         </div>
 
-                        <button class="section_button">Добавить в корзину</button>
+                        {% if product.stock > 0 %}
+                            <form method="post" action="{% url 'cart_add' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="section_button">
+                                    Добавить в корзину
+                                </button>
+                            </form>
+                        {% else %}
+                            <button type="button" class="section_button" disabled>
+                                Нет в наличии
+                            </button>
+                        {% endif %}
+
                     </div>
                 </aside>
+
             </div>
         </div>
     </section>

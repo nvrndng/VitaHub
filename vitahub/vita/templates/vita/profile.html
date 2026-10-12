@@ -37,10 +37,9 @@
 
                     <nav class="profile_navigation">
                         <a href="{% url 'profile' %}" class="active">Мой профиль</a>
-                        <a href="#">Мои заказы</a>
-                        <a href="#">Мои консультации</a>
-                        <a href="#">Мои баллы</a>
-                        <a href="#">Результаты анализов</a>
+                        <a href="{% url 'orders' %}">Мои заказы</a>
+                        <a href="{% url 'consultations' %}">Мои консультации</a>
+                        <a href="{% url 'lab_results' %}">Результаты анализов</a>
                     </nav>
                 </aside>
 

@@ -12,109 +12,45 @@
             </div>
 
             <div class="shop_filters">
-                <button class="shop_filter active">Все товары</button>
-                <button class="shop_filter">Витамины</button>
-                <button class="shop_filter">Для сна</button>
-                <button class="shop_filter">Минералы</button>
-                <button class="shop_filter">Для иммунитета</button>
+                <a href="{% url 'shop' %}" class="shop_filter {% if not selected_category %}active{% endif %}">Все товары</a>
+
+                {% for category in categories %}
+                    <a href="{% url 'shop' %}?category={{ category.id }}" class="shop_filter {% if selected_category == category.id|stringformat:'s' %}active{% endif %}">{{ category.name }}</a>
+                {% endfor %}
+
+
             </div>
 
             <div class="shop_page_grid">
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Витамины</div>
-
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Витамины</span>
-                        <h2>Комплекс витаминов</h2>
-                        <p>Комплекс витаминов для ежедневного рациона.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
+                {% for product in products %}
+                    <a href="{% url 'product_detail' product.id %}" class="shop_product_card">
+                        <div class="shop_product_image">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <span>{{ product.name }}</span>
+                            {% endif %}
                         </div>
 
-                    </div>
-                </a>
+                        <div class="shop_product_content">
+                            {% if product.category %}
+                                <span class="shop_product_category">
+                                    {{ product.category.name }}
+                                </span>
+                            {% endif %}
 
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Минералы</div>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.description|truncatewords:18 }}</p>
 
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Минералы</span>
-                        <h2>Магний</h2>
-                        <p>Минеральный комплекс для ежедневного рациона.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
+                            <div class="shop_product_bottom">
+                                <strong>{{ product.price }} ₽</strong>
+                                <span>Подробнее →</span>
+                            </div>
                         </div>
-
-                    </div>
-                </a>
-
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Сон</div>
-
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Для сна</span>
-                        <h2>Комплекс для сна</h2>
-                        <p>Набор витаминов для поддержания режима сна.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
-                        </div>
-
-                    </div>
-                </a>
-
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Иммунитет</div>
-
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Иммунитет</span>
-                        <h2>Комплекс для иммунитета</h2>
-                        <p>Комплекс для ежедневного рациона.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
-                        </div>
-
-                    </div>
-                </a>
-
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Витамины</div>
-
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Витамины</span>
-                        <h2>Витамин D</h2>
-                        <p>Когда недостаточно солнца.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
-                        </div>
-
-                    </div>
-                </a>
-
-                <a href="" class="shop_product_card">
-                    <div class="shop_product_image">Питание</div>
-
-                    <div class="shop_product_content">
-                        <span class="shop_product_category">Питание</span>
-                        <h2>Полезный комплекс</h2>
-                        <p>Дополнение к сбалансированному рациону.</p>
-
-                        <div class="shop_product_bottom">
-                            <strong>0 ₽</strong>
-                            <span>Подробнее -></span>
-                        </div>
-
-                    </div>
-                </a>
+                    </a>
+                {% empty %}
+                    <p>Пока товаров нет. Загляните сюда немного позже!</p>
+                {% endfor %}
             </div>
         </div>
     </section>

@@ -157,6 +157,9 @@ class Order(models.Model):
     total = models.DecimalField('Сумма заказа', max_digits=10, decimal_places=2, default=0)
     phone = models.CharField('Телефон для связи', max_length=30)
     address = models.CharField('Адрес доставки', max_length=300)
+    delivery_method = models.CharField('Способ получения', max_length=20, choices=[('delivery', 'Доставка'), ('pickup', 'Самовывоз')], default='delivery')
+    payment_method = models.CharField('Способ оплаты', max_length=20, choices=[('online', 'Онлайн-оплата'), ('on_delivery', 'При получении')], default='on_delivery')
+    comment = models.TextField('Комментарий к заказу', blank=True)
     created_at = models.DateTimeField('Дата заказа', auto_now_add=True)
     updated_at = models.DateTimeField('Дата изменения', auto_now=True)
 

@@ -51,7 +51,35 @@
                             <strong>{{ specialist.consultation_price }} ₽</strong>
                         </div>
 
-                        <a href="" class="section_button">Записаться</a>
+                        {% if specialist.is_available %}
+                            <form method="post" class="specialist_booking_form">
+                                {% csrf_token %}
+
+                                <div class="form_group">
+                                    <label for="scheduled_at">Дата и время</label>
+                                    <input type="datetime-local" id="scheduled_at" name="scheduled_at" required>
+                                </div>
+
+                                <div class="form_group">
+                                    <label for="consultation_format">Формат консультации</label>
+                                    <select name="consultation_format" id="consultation_format" required>
+                                        <option value="chat">Онлайн-чат</option>
+                                        <option value="video">Видеозвонок</option>
+                                    </select>
+                                </div>
+
+                                <div class="form_group">
+                                    <label for="notes">Комментарий (необязательно)</label>
+                                    <textarea id="notes" name="notes" rows="3" placeholder="Опишите, что хотели бы обсудить"></textarea>
+                                </div>
+
+                                <button type="submit" class="section_button">Записаться</button>
+                            </form>
+                        {% else %}
+                            <p>Специалист временно не принимает записи.</p>
+                        {% endif %}
+
+
                     </div>
                 </aside>
             </div>

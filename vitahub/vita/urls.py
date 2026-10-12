@@ -38,18 +38,119 @@ urlpatterns = [
     ),
 
 
-    path('articles/', views.articles_view, name='articles'),
+    path(
+        'articles/',
+        views.articles_view,
+        name='articles'
+    ),
 
-    path('articles/<int:article_id>/', views.article_detail_view, name='article_detail'),
+    path(
+        'articles/<int:article_id>/',
+        views.article_detail_view,
+        name='article_detail'
+    ),
 
-    path('specialists/', views.specialists_view, name='specialists'),
+    path(
+        'specialists/',
+         views.specialists_view,
+         name='specialists'
+    ),
 
-    path('specialists/<int:specialist_id>/', views.specialist_detail_view, name='specialists_detail'),
+    path(
+        'specialists/<int:specialist_id>/',
+         views.specialist_detail_view,
+         name='specialist_detail'
+    ),
 
-    path('forum/', views.forum_view, name='forum'),
+    path(
+        'forum/',
+         views.forum_view,
+         name='forum'
+    ),
 
-    path('forum/topic/<int:topic_id>/', views.forum_topic_view, name='forum_topic'),
+    path(
+        'forum/topic/<int:topic_id>/',
+         views.forum_topic_view,
+         name='forum_topic'
+    ),
 
-    path('forum/create/', views.forum_create_view, name='forum_create'),
+    path(
+        'forum/create/',
+        views.forum_create_view,
+        name='forum_create'
+    ),
+
+    path(
+        'shop/',
+        views.shop_view,
+        name='shop'
+    ),
+
+    path(
+        'shop/<int:product_id>/',
+        views.product_detail_view,
+        name='product_detail'
+    ),
+
+    path(
+        'cart/',
+        views.cart_view,
+        name='cart'
+    ),
+
+    path(
+        'cart/add/<int:product_id>/',
+        views.cart_add_view,
+        name='cart_add'
+    ),
+
+    path(
+        'cart/update/<int:product_id>/',
+        views.cart_update_view,
+        name='cart_update'
+    ),
+
+    path(
+        'cart/remove/<int:product_id>/',
+        views.cart_remove_view,
+        name='cart_remove'
+    ),
+
+    path(
+        'checkout/',
+        views.checkout_view,
+        name='checkout'
+    ),
+
+    path(
+        'orders/',
+        views.orders_view,
+        name='orders'
+    ),
+
+    path(
+        'consultations/',
+        views.consultations_view,
+        name='consultations'
+    ),
+
+    path(
+        'consultations/<int:consultation_id>/cancel/',
+        views.cancel_consultation_view,
+        name='cancel_consultation'
+    ),
+
+    path(
+        'lab-results/',
+        views.lab_results_view,
+        name='lab_results'
+    ),
+
+    path(
+        'lab-results/<int:result_id>/download/',
+        views.lab_result_download_view,
+        name='lab_result_download'
+    ),
+
 
 ]
