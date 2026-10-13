@@ -5,7 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitaHub</title>
+    <title>
+        {% block title %}
+        VitaHub — портал о здоровье
+        {% endblock %}
+    </title>
+    <meta name="theme-color" content="#4f8f7b">
+    <meta name="description" content="{% block meta_description %}VitaHub — статьи о здоровье, специалисты, форум и товары для заботы о себе.{% endblock %}">
     <link rel="stylesheet" href="{% static 'vita/style.css' %}">
 </head>
 <body>

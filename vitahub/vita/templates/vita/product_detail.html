@@ -38,14 +38,26 @@
                                 <strong>{{ product.price }} ₽</strong>
                             </div>
 
+
                             {% if product.stock > 0 %}
-                                <p class="product_detail_stock">В наличии: {{ product.stock }} шт.</p>
+                                <p class="product_detail_stock">
+                                    В наличии: {{ product.stock }} шт.
+                                </p>
 
-                                <button type="button" class="section_button">Добавить в корзину</button>
+                                <form method="post" action="{% url 'cart_add' product.id %}" class="product_detail_add_form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="section_button">
+                                        Добавить в корзину
+                                    </button>
+                                </form>
                             {% else %}
-                                <p class="product_detail_stock">Товара сейчас нет в наличии.</p>
+                                <p class="product_detail_stock">
+                                    Товара сейчас нет в наличии.
+                                </p>
 
-                                <button type="button" class="section_button" disabled>Нет в наличии</button>
+                                <button type="button" class="section_button" disabled>
+                                    Нет в наличии
+                                </button>
                             {% endif %}
 
                         </div>
@@ -128,13 +140,15 @@
                         </div>
 
                         {% if product.stock > 0 %}
-                            <form method="post" action="{% url 'cart_add' product.id %}">
+                            <p class="product_detail_stock">В наличии: {{ product.stock }} шт.</p>
+                            <form method="post" action="{% url 'cart_add' product.id %}" class="product_detail_add_form">
                                 {% csrf_token %}
                                 <button type="submit" class="section_button">
                                     Добавить в корзину
                                 </button>
                             </form>
                         {% else %}
+                            <p class="product_detail_stock">Товара сейчас нет в наличии</p>
                             <button type="button" class="section_button" disabled>
                                 Нет в наличии
                             </button>

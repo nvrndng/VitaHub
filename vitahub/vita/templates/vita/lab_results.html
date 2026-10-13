@@ -113,11 +113,11 @@
                                     <a href="{% url 'lab_result_download' result.id %}">Скачать -></a>
                                 </article>
                             {% empty %}
-                                <div class="lab_result_card">
-                                    <div class="lab_result_content">
+                                <div class="lab_result_empty">
+
                                         <h3>Пока нет загруженных результатов</h3>
                                         <p>Добавьте первый файл с результатами анализа с помощью формы выше.</p>
-                                    </div>
+
                                 </div>
                             {% endfor %}
                         </div>

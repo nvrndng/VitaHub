@@ -1,4 +1,5 @@
 {% extends 'vita/base.html' %}
+{% load static %}
 {% block content %}
 
 <main>
@@ -23,15 +24,11 @@
 
       </div>
 
-      <div class="hero_visual">
-        <div class="hero_card">
-          <span class="hero_card-icon">+</span>
-          <h3>Забота о здоровье</h3>
-          <p>
-            Информация и возможности для заботы о себе
-          </p>
+      <div class="hero_visual hero_visual_illustration">
+        <img src="{% static 'vita/images/hero-botanical.png' %}" alt="" width="900" height="700" fetchpriority="high">
 
-        </div>
+
+
 
       </div>
 

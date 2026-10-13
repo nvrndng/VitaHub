@@ -118,7 +118,9 @@ def articles_view(request):
 def article_detail_view(request, article_id):
     article = get_object_or_404(Article, pk=article_id, is_published=True)
 
-    return render(request, 'vita/article_detail.html', {'article': article})
+    other_articles = (Article.objects.filter(is_published=True).exclude(pk=article.pk).order_by('-created_at')[:3])
+
+    return render(request, 'vita/article_detail.html', {'article': article, 'other_articles': other_articles})
 
 
 def specialists_view(request):
