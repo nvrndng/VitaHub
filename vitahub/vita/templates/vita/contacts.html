@@ -1,0 +1,77 @@
+{% extends 'vita/base.html' %}
+
+{% block content %}
+<main>
+    <section class="auth_page">
+        <div class="container">
+            <div class="auth_wrapper">
+
+                <div class="auth_heading">
+                    <p class="section_subtitle">VitaHub</p>
+                    <h1>Свяжитесь с нами</h1>
+                    <p>
+                        Есть вопросы или предложения?
+                        Напишите нам — мы будем рады помочь.
+                    </p>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="form_message">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form class="auth_form" method="post">
+                    {% csrf_token %}
+
+                    <div class="auth_form_group">
+                        <label for="name">Ваше имя</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Введите имя"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="auth_form_group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Введите email"
+                            maxlength="254"
+                            required
+                        >
+                    </div>
+
+                    <div class="auth_form_group">
+                        <label for="message">Сообщение</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Напишите ваше сообщение"
+                            rows="6"
+                            maxlength="5000"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="section_button auth_submit"
+                    >
+                        Отправить сообщение
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

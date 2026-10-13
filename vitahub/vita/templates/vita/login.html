@@ -12,6 +12,12 @@
                     <p>Войдите в свой аккаунт, чтобы пользоваться всеми возможностями VitaHub.</p>
                 </div>
 
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="form_message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
                 <form class="auth_form" method="post">
 
                     {% csrf_token %}
@@ -42,7 +48,7 @@
                             <span>Запомнить меня</span>
                         </label>
 
-                        <a href="#">Забыли пароль?</a>
+                        <a href="{% url 'password_reset' %}">Забыли пароль?</a>
                     </div>
 
                     <button type="submit" class="section_button auth_submit">Войти</button>

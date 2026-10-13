@@ -11,7 +11,16 @@ from django.db import transaction
 from .forms import RegisterForm, ProfileForm
 from django.http import FileResponse, Http404
 from pathlib import Path
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.conf import settings
 
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import send_mail
+from django.urls import reverse
 
 
 
@@ -25,6 +34,7 @@ def home(request):
     return render(request, 'vita/home.html', {'articles': articles, 'forum_topics': forum_topics,'products': products})
 
 
+
 def register_view(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -33,18 +43,86 @@ def register_view(request):
         form = RegisterForm(request.POST)
 
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            try:
+                with transaction.atomic():
+                    user = form.save(commit=False)
+                    user.is_active = False
+                    user.save()
 
-            return redirect('home')
+                    Profile.objects.get_or_create(user=user)
+
+                    uid = urlsafe_base64_encode(force_bytes(user.pk))
+                    token = default_token_generator.make_token(user)
+
+                    activation_url = request.build_absolute_uri(
+                        reverse(
+                            'activate_account',
+                            kwargs={
+                                'uidb64': uid,
+                                'token': token,
+                            },
+                        )
+                    )
+
+                    send_mail(
+                        subject='Подтверждение регистрации VitaHub',
+                        message=(
+                            f"Здравствуйте, {user.first_name or 'пользователь'}!\n\n"
+                            "Спасибо за регистрацию на VitaHub!\n"
+                            "Для подтверждения адреса электронной почты "
+                            "перейдите по ссылке:\n\n"
+                            f"{activation_url}\n\n"
+                            "Если вы не регистрировались на VitaHub, "
+                            "просто проигнорируйте это письмо."
+                        ),
+                        from_email=None,
+                        recipient_list=[user.email],
+                        fail_silently=False,
+                    )
+
+                messages.success(
+                    request,
+                    'Регистрация почти завершена! '
+                    'Проверьте почту и перейдите по ссылке из письма.',
+                )
+                return redirect('login')
+
+            except Exception:
+                messages.error(
+                    request,
+                    'Не удалось отправить письмо. '
+                    'Попробуйте зарегистрироваться еще раз позже.',
+                )
     else:
         form = RegisterForm()
 
-    return render(
-        request,
-        'vita/register.html',
-        {'form': form}
-    )
+    return render(request, 'vita/register.html', {'form': form})
+
+
+def activate_account(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if user.is_active:
+            messages.info(request, 'Ваш аккаунт уже подтвержден.')
+        else:
+            user.is_active = True
+            user.save(update_fields=['is_active'])
+            messages.success(
+                request,
+                'Email подтверждён! Теперь вы можете войти в VitaHub.',
+            )
+    else:
+        messages.error(
+            request,
+            'Ссылка подтверждения недействительна.',
+        )
+
+    return redirect('login')
 
 
 def login_view(request):
@@ -682,3 +760,52 @@ def points_view(request):
 
     return render(request, 'vita/points.html', {'profile': profile, 'transactions': transactions})
 
+
+
+
+
+def contacts_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        message = request.POST.get('message', '').strip()
+
+        if not name or not email or not message:
+            messages.error(request, 'Заполните все поля формы.')
+            return render(request, 'vita/contacts.html')
+
+        if len(name) > 100 or len(email) > 254 or len(message) > 5000:
+            messages.error(request, 'Одно из полей превышает допустимую длину.')
+            return render(request, 'vita/contacts.html')
+
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Введите корректный адрес электронной почты.')
+            return render(request, 'vita/contacts.html')
+
+        try:
+            send_mail(
+                subject=f'Новое сообщение с сайта VitaHub от {name}',
+                message=(
+                    f'Имя: {name}\n'
+                    f'Email отправителя: {email}\n\n'
+                    f'Сообщение:\n{message}'
+                ),
+                from_email=None,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
+        except Exception:
+            messages.error(
+                request,
+                'Не удалось отправить сообщение. Попробуйте позже.',
+            )
+        else:
+            messages.success(
+                request,
+                'Ваше сообщение отправлено! Спасибо за обращение.',
+            )
+            return redirect('contacts')
+
+    return render(request, 'vita/contacts.html')

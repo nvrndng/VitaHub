@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 
@@ -11,6 +12,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     about = models.TextField(blank=True)
     points = models.PositiveIntegerField(default=0)
+
 
     def __str__(self):
         return self.user.username
@@ -78,6 +80,7 @@ class ForumTopic(models.Model):
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
     updated_at = models.DateTimeField('Дата изменения', auto_now=True)
     is_closed = models.BooleanField('Тема закрыта', default=False)
+
 
     class Meta:
         verbose_name = 'Тема форума'
