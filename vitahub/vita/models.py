@@ -35,7 +35,7 @@ class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='articles')
     title = models.CharField('Заголовок', max_length=200)
     short_description = models.TextField('Краткое описание', max_length=300)
-    content = models.CharField('Текст статьи')
+    content = models.TextField('Текст статьи')
     image = models.ImageField(upload_to='articles/', blank=True, null=True)
     is_published = models.BooleanField('Опубликована', default=False)
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
