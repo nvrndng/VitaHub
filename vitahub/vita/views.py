@@ -99,6 +99,9 @@ def register_view(request):
     return render(request, 'vita/register.html', {'form': form})
 
 
+def terms_view(request):
+    return render(request, 'vita/terms.html')
+
 def activate_account(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -251,10 +254,19 @@ def specialist_detail_view(request, specialist_id):
     return render(request, 'vita/specialist_detail_page.html', {'specialist': specialist})
 
 
+
 def forum_view(request):
+    selected_category = request.GET.get('category', '')
+
     topics = ForumTopic.objects.select_related('author').all()
 
-    return render(request, 'vita/forum.html', {'topics': topics})
+    if selected_category in dict(ForumTopic.CATEGORY_CHOICES):
+        topics = topics.filter(category=selected_category)
+
+    return render(request, 'vita/forum.html', {
+        'topics': topics,
+        'selected_category': selected_category,
+    })
 
 
 def forum_topic_view(request, topic_id):
@@ -290,19 +302,24 @@ def forum_create_view(request):
     if request.method == 'POST':
         title = request.POST.get('title', '').strip()
         content = request.POST.get('content', '').strip()
+        category = request.POST.get('category', 'health')
 
-        if title and content:
-            ForumTopic.objects.create(author=request.user, title=title, content=content)
+        valid_categories = dict(ForumTopic.CATEGORY_CHOICES)
 
+        if title and content and category in valid_categories:
+            ForumTopic.objects.create(
+                author=request.user,
+                title=title,
+                content=content,
+                category=category,
+            )
             return redirect('forum')
 
-        error = 'Заполните название темы и текст сообщения'
-
+        error = 'Заполните название темы и текст сообщения или выберите корректную категорию'
     else:
         error = ''
 
     return render(request, 'vita/forum_create.html', {'error': error})
-
 
 
 def shop_view(request):

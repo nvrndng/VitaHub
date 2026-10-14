@@ -20,13 +20,34 @@
 
             </div>
 
+
             <div class="forum_categories">
-                <button class="forum_category active">Все темы</button>
-                <button class="forum_category">Здоровье</button>
-                <button class="forum_category">Питание</button>
-                <button class="forum_category">Сон</button>
-                <button class="forum_category">Спорт</button>
+                <a href="{% url 'forum' %}"
+                   class="forum_category {% if not selected_category %}active{% endif %}">
+                    Все темы
+                </a>
+
+                <a href="{% url 'forum' %}?category=health"
+                   class="forum_category {% if selected_category == 'health' %}active{% endif %}">
+                    Здоровье
+                </a>
+
+                <a href="{% url 'forum' %}?category=nutrition"
+                   class="forum_category {% if selected_category == 'nutrition' %}active{% endif %}">
+                    Питание
+                </a>
+
+                <a href="{% url 'forum' %}?category=sleep"
+                   class="forum_category {% if selected_category == 'sleep' %}active{% endif %}">
+                    Сон
+                </a>
+
+                <a href="{% url 'forum' %}?category=sport"
+                   class="forum_category {% if selected_category == 'sport' %}active{% endif %}">
+                    Спорт
+                </a>
             </div>
+
 
                 {% for topic in topics %}
                     <article class="forum_topic_card">

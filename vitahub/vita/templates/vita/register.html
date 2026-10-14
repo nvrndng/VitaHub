@@ -67,11 +67,21 @@
 
             </div>
 
-            <label class="auth_agreement">
-              <input type="checkbox" id="register_agreement" required>
+            <div class="auth_agreement">
+              <label for="register_agreement">
+                <input type="checkbox" id="register_agreement" name="agreement" required {% if form.agreement.value %}checked{% endif %}>
+                <span>
+                  Я принимаю
+                  <a href="{% url 'terms' %}" target="_blank" rel="noopener noreferrer">условия пользования VitaHub</a>
+                </span>
+              </label>
 
-              <span>Я согласен с условиями пользования сервисом VitaHub</span>
-            </label>
+              {% if form.agreement.errors %}
+                <div class="form_errors">
+                  {{ form.agreement.errors }}
+                </div>
+              {% endif %}
+            </div>
 
             <button type="submit" class="section_button auth_submit">Зарегистрироваться</button>
 

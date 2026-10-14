@@ -209,4 +209,10 @@ urlpatterns = [
         name='contacts',
     ),
 
+    path(
+        'terms/',
+        views.terms_view,
+        name='terms'
+    ),
+
 ]

@@ -77,6 +77,8 @@ class ForumTopic(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='forum_topics')
     title = models.CharField('Заголовок темы', max_length=200)
     content = models.TextField('Текст темы')
+    CATEGORY_CHOICES = [('health', 'Здоровье'), ('nutrition', 'Питание'), ('sleep', 'Сон'), ('sport', 'Спорт')]
+    category = models.CharField('Категория', max_length=20, choices=CATEGORY_CHOICES, default='health')
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
     updated_at = models.DateTimeField('Дата изменения', auto_now=True)
     is_closed = models.BooleanField('Тема закрыта', default=False)

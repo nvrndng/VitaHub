@@ -14,8 +14,15 @@
                     <article class="forum_post">
                         <div class="forum_post_header">
                             <div class="forum_post_author">
-                                <div class="forum_post_avatar">{{ topic.author.first_name|default:topic.author.username|first|upper }}</div>
-                                <div>
+
+                                <div class="forum_post_avatar">
+                                    {% if topic.author.profile.photo %}
+                                        <img src="{{ topic.author.profile.photo.url }}" alt="Аватар автора">
+                                    {% else %}
+                                        {{ topic.author.first_name|default:topic.author.username|first|upper }}
+                                    {% endif %}
+                                </div>
+
                                     <h3>{{ topic.author.first_name|default:topic.author.username }}</h3>
                                     <span>Автор темы</span>
                                 </div>
@@ -41,7 +48,15 @@
                             <article class="forum_post forum_answer">
                                 <div class="forum_post_header">
                                     <div class="forum_post_author">
-                                        <div class="forum_post_avatar">{{ post.author.first_name|default:post.author.username|first|upper }}</div>
+
+                                        <div class="forum_post_avatar">
+                                            {% if post.author.profile.photo %}
+                                                <img src="{{ post.author.profile.photo.url }}" alt="Аватар участника">
+                                            {% else %}
+                                                {{ post.author.first_name|default:post.author.username|first|upper }}
+                                            {% endif %}
+                                        </div>
+
                                         <div>
                                             <h3>{{ post.author.first_name|default:post.author.username }}</h3>
                                             <span>Участник</span>

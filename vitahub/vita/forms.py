@@ -6,6 +6,14 @@ from .models import Profile
 
 class RegisterForm(forms.ModelForm):
 
+    agreement = forms.BooleanField(
+        required=True,
+        label='Я соглашаюсь с условиями пользования сервисом VitaHub',
+        error_messages={
+            'required': 'Для регистрации необходимо принять условия пользования.'
+        }
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput,
         label='Пароль'
