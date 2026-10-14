@@ -9,12 +9,13 @@
                 <a href="{% url 'forum' %}"><- Вернуться к форуму</a>
             </div>
 
+
             <div class="forum_topic_layout">
                 <div class="forum_topic_main">
+
                     <article class="forum_post">
                         <div class="forum_post_header">
                             <div class="forum_post_author">
-
                                 <div class="forum_post_avatar">
                                     {% if topic.author.profile.photo %}
                                         <img src="{{ topic.author.profile.photo.url }}" alt="Аватар автора">
@@ -23,6 +24,7 @@
                                     {% endif %}
                                 </div>
 
+                                <div>
                                     <h3>{{ topic.author.first_name|default:topic.author.username }}</h3>
                                     <span>Автор темы</span>
                                 </div>
@@ -31,8 +33,8 @@
                             <span class="forum_post_date">{{ topic.created_at|date:"d.m.Y, H:i" }}</span>
                         </div>
 
-
                         <h1>{{ topic.title }}</h1>
+
                         <div class="forum_post_text">
                             {{ topic.content|linebreaks }}
                         </div>
@@ -48,7 +50,6 @@
                             <article class="forum_post forum_answer">
                                 <div class="forum_post_header">
                                     <div class="forum_post_author">
-
                                         <div class="forum_post_avatar">
                                             {% if post.author.profile.photo %}
                                                 <img src="{{ post.author.profile.photo.url }}" alt="Аватар участника">
@@ -64,22 +65,15 @@
                                     </div>
 
                                     <span class="forum_post_date">{{ post.created_at|date:"d.m.Y, H:i" }}</span>
-
                                 </div>
 
                                 <div class="forum_post_text">
                                     {{ post.content|linebreaks }}
-
                                 </div>
-
-
                             </article>
-
                         {% empty %}
                             <p>Пока нет ответов. Будьте первым, кто поделится своим мнением!</p>
                         {% endfor %}
-
-
                     </div>
 
                     <div class="forum_reply">
@@ -95,18 +89,15 @@
                             {% endif %}
 
                             {% if user.is_authenticated %}
-                                <form method="post">{% csrf_token %}<textarea name="content" placeholder="Напишите свой ответ..." required></textarea>
-                                <button type="submit" class="section_button">Ответить</button>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <textarea name="content" placeholder="Напишите свой ответ..." required></textarea>
+                                    <button type="submit" class="section_button">Ответить</button>
                                 </form>
-
                             {% else %}
-
                                 <p>Чтобы ответить, необходимо <a href="{% url 'login' %}">войти в аккаунт</a></p>
-
                             {% endif %}
-
                         {% endif %}
-
                     </div>
 
                 </div>
@@ -133,16 +124,13 @@
                         <div class="forum_sidebar_item">
                             <span>Статус</span>
                             <strong>
-                                {% if topic.is_closed %}
-                                    Закрыта
-                                {% else %}
-                                    Открыта
-                                {% endif %}
+                                {% if topic.is_closed %}Закрыта{% else %}Открыта{% endif %}
                             </strong>
                         </div>
                     </div>
                 </aside>
             </div>
+
         </div>
     </section>
 </main>
